@@ -39,6 +39,7 @@ export function userReducer(state = initialState, action) {
     case SET_CLICKUSER:
       return {
         ...state,
+        isFetching: false,
         clickUser: action.clickUser
     };
 
