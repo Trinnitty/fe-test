@@ -1,26 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './App.css';
+import DataRow from '../src/components/row';
+import Loading from '../src/components/loading';
+import { getDataRequest, getDataSuccess, getDataFailure } from '../src/actions/dataAction';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const url = 'https://jsonplaceholder.typicode.com/posts';
+class App extends Component {
+
+  componentDidMount() {
+    this.getData();
+  }
+
+  getData=() =>{
+    const { dispatch } = this.props;
+    dispatch(getDataRequest());
+    fetch(url)
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      dispatch(getDataSuccess(data));
+    })
+    .catch(error => {
+      dispatch(getDataFailure());
+    });
+  }
+
+  render(){
+    const { data, isFetching, error } = this.props;
+    return (
+      <div className="App">
+        {
+          !isFetching ?
+          <div className="table">
+          {
+            data && data.length && data.map((item)=>{
+              return <DataRow item={item} key={item.id}/>
+            })
+          }
+          </div>
+        : <Loading /> }
+        {
+          error && <div>{ error }</div>
+        }
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    data: state.data.data,
+    isFetching: state.data.isFetching,
+    error: state.data.errorMessage
+  }
+}
+
+export default connect(mapStateToProps)(App);
