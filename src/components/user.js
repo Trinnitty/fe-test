@@ -58,7 +58,7 @@ class User extends Component {
     const { data, isFetching, error, clickUser } = this.props;
     return (
       <>
-        <button><Link className="link" to={`/`}>Go Back</Link></button>
+        <Link className="link back" to={`/`}><button>Go Back</button></Link>
         {
           clickUser && 
           <div className="User">
