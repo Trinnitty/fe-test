@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { setClickUser } from '../actions/dataUserAction';
 
 class DataRow extends Component {
-
   handleClick = (item) => {
     const { dispatch } = this.props;
     dispatch(setClickUser(item));

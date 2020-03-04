@@ -9,7 +9,7 @@ const url = 'https://jsonplaceholder.typicode.com/posts';
 class App extends Component {
 
   componentDidMount() {
-    this.getData();
+      this.getData();
   }
 
   getData=() =>{

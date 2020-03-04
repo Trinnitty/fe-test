@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Loading from '../components/loading';
 import { Link } from 'react-router-dom';
-import { getDataUserRequest, getDataUserSuccess, getDataUserFailure } from '../actions/dataUserAction';
+import { getDataUserRequest, getDataUserSuccess, getDataUserFailure, setClickUser } from '../actions/dataUserAction';
 
-const url = 'https://jsonplaceholder.typicode.com/users';
+const urlUser = 'https://jsonplaceholder.typicode.com/users';
+const urlPost = 'https://jsonplaceholder.typicode.com/posts';
 
 class User extends Component {
   constructor(props){
@@ -15,19 +16,38 @@ class User extends Component {
   }
 
   componentDidMount() {
-    this.getData();
+      this.getDataUser();
   }
 
-  getData=() =>{
-    const { dispatch } = this.props;
+  getDataUser=() =>{
+    const { dispatch, clickUser } = this.props;
     const { number } = this.state;
+    if(number && !clickUser){
+      this.getDataPost();
+    }
     dispatch(getDataUserRequest());
-    fetch(`${url}/${number}`)
+    fetch(`${urlUser}/${number}`)
     .then(response => {
       return response.json();
     })
     .then(data => {
       dispatch(getDataUserSuccess(data));
+    })
+    .catch(error => {
+      dispatch(getDataUserFailure(error));
+    });
+  }
+
+  getDataPost=() =>{
+    const { number } = this.state;
+    const { dispatch } = this.props;
+    dispatch(getDataUserRequest());
+    fetch(`${urlPost}/${number}`)
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      dispatch(setClickUser(data));
     })
     .catch(error => {
       dispatch(getDataUserFailure(error));

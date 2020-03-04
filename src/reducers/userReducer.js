@@ -3,7 +3,6 @@ import {
   GET_DATAUSER_SUCCESS,
   GET_DATAUSER_FAILURE,
   SET_CLICKUSER
-
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -36,13 +35,14 @@ export function userReducer(state = initialState, action) {
         isFetching: false,
         errorMessage: action.error
       };
+
     case SET_CLICKUSER:
       return {
         ...state,
         isFetching: false,
         clickUser: action.clickUser
     };
-
+    
     default:
       return state;
   }
