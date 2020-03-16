@@ -4,18 +4,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { Provider } from 'react-redux';
 import store from './store';
-import User from '../src/components/user';
+import User from '../src/components/user/user';
 
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import theme from './components/theme';
 
 ReactDOM.render( 
     <BrowserRouter>
       <Provider store={store}>
-        <Switch>
-          <Route exact path='/' component={App} />
-          <Route exact path='/:number' component={User}/>
-        </Switch>
+        <MuiThemeProvider theme={theme}>
+            <Switch>
+            <Route exact path='/' component={App} />
+            <Route exact path='/:number' component={User}/>
+            </Switch>
+        </MuiThemeProvider>
       </Provider>
     </BrowserRouter>
   ,

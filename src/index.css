@@ -53,23 +53,10 @@ table {
 }
 
 td, th {
-  border: 1px solid #800;
+  border: 1px solid purple;
   padding: 8px;
+  border-collapse: collapse;
  } 
-
- .App {
-   display: flex;
-   width: 70%;
-   margin: auto;
- }
-
- .User {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  margin: auto;
-  background-color: yellow;
- }
 
 .table {
   display: flex;
@@ -81,42 +68,6 @@ td, th {
   text-decoration: none;
 }
 
- .row {
-  display: flex;
-  border: 1px solid black;
-  text-decoration: none;
-  padding: 5px;
-  background-color: rgb(104, 114, 114);
- }
-
- .cell-1{
-  display: flex;
-  width: 5%;
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-bottom: 20px;
-  text-align: center;
-  text-decoration: none;
-  border-right: 1px solid black;
- }
-
- .cell-2{
-  display: flex;  
-  width: 5%;
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-bottom: 20px;
-  border-right: 1px solid black;
- }
-
- .cell-3{
-  display: flex;
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-bottom: 20px;
-  text-decoration: none;
- }
-
  .link {
   text-decoration: none;
  }
@@ -124,3 +75,8 @@ td, th {
  button {
    padding: 10px;
  }
+ 
+.root {
+    width: '100%';
+    overflow: 'auto';
+}

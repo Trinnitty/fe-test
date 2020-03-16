@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
 import DataRow from '../src/components/row';
-import Loading from '../src/components/loading';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import { getDataRequest, getDataSuccess, getDataFailure } from '../src/actions/dataAction';
 
 const url = 'https://jsonplaceholder.typicode.com/posts';
@@ -30,23 +35,26 @@ class App extends Component {
   }
 
   render(){
-    const { data, isFetching, error } = this.props;
+    const { data = [], isFetching, error, history } = this.props;
     return (
-      <div className="App">
-        {
-          !isFetching ?
-          <div className="table">
-          {
-            data && data.length && data.map((item)=>{
-              return <DataRow item={item} key={item.id}/>
+      <Paper >
+        <Table>  
+            <TableHead>
+                <TableRow>
+                    <TableCell>id</TableCell>
+                    <TableCell>userId</TableCell>
+                    <TableCell>title</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
+            {
+            data.map((item)=>{
+              return <DataRow item={item} key={item.id} history={history}/>
             })
           }
-          </div>
-        : <Loading /> }
-        {
-          error && <div>{ error }</div>
-        }
-      </div>
+            </TableBody>
+        </Table>  
+      </Paper>
     );
   }
 }

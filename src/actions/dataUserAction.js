@@ -1,8 +1,7 @@
 import { 
   GET_DATAUSER_REQUEST,
   GET_DATAUSER_SUCCESS,
-  GET_DATAUSER_FAILURE,
-  SET_CLICKUSER
+  GET_DATAUSER_FAILURE
 } from '../constants/actionTypes';
 
 export function getDataUserRequest() {
@@ -22,12 +21,5 @@ export function getDataUserFailure(error) {
   return {
       type: GET_DATAUSER_FAILURE,
       error: error
-  };
-}
-
-export function setClickUser(data) {
-  return {
-      type: SET_CLICKUSER,
-      clickUser: data
   };
 }
